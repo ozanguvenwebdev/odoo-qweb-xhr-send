@@ -41,7 +41,7 @@
                             <!--    </a>-->
                             <!--</div>-->
                             <div class="col-md-4 form-group text-center mt-5" t-if="complete != 'complete'">
-                                <a t-attf-href="https://besttransformer.cloudoffix.com/customhttp/run/konaklama_acente_onayi?konaklama_req=#{konaklama_id}&amp;token=#{konaklama.x_token}&amp;state=positive"
+                                <a t-attf-href="https://******************/customhttp/run/konaklama_acente_onayi?konaklama_req=#{konaklama_id}&amp;token=#{konaklama.x_token}&amp;state=positive"
                                    target="_blank"
                                    role="button"
                                    class="no-border btn btn-primary"
@@ -54,7 +54,7 @@
                                 </a>
                             </div> 
                             <div class="col-md-4 form-group text-center mt-5" t-if="complete != 'complete'">
-                                <a t-attf-href="https://besttransformer.cloudoffix.com/customhttp/run/konaklama_acente_onayi?konaklama_req=#{konaklama_id}&amp;token=#{konaklama.x_token}&amp;state=negative"
+                                <a t-attf-href="https://******************/customhttp/run/konaklama_acente_onayi?konaklama_req=#{konaklama_id}&amp;token=#{konaklama.x_token}&amp;state=negative"
                                    target="_blank"
                                    role="button"
                                    class="btn btn-danger"

@@ -1,0 +1,131 @@
+<t t-name="website.konaklama-acente-onay">
+  <t t-set="konaklama_id" t-value="request.params.get('konaklama_id', False)" />
+  <t t-set="complete" t-value="request.params.get('complete', 0)" />
+  <!--<t t-esc="travel_id"/>-->
+  <t t-set="konaklama" t-value="request.env['accommodation.request'].sudo().search([('id','=',konaklama_id)])"/>
+  <!--<t t-esc="travel"/>-->
+
+    <t t-call="website.layout">
+        <div id="wrap" class="oe_structure oe_empty">
+          
+            <!-- Header -->
+            <header class="header s_header text-white bg-gamma" style="background-color: #8093FC !important;">
+                <div class="overlay opacity-75 "/>
+                <div class="container text-center">
+                    <div class="row">
+                        <div class="col-md-8 mx-auto">
+                            <h1 class="display-41">BEST TRANSFORMER</h1>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <!-- /.header -->
+            <div class="container text-center">
+                    <div class="row">
+                        <div class="col-md-12 mx-auto">
+                            <br/>
+                            <h2>İşleminizi aşağıdaki butonlar ile yapabilirsiniz.</h2>
+                        </div>
+                        <hr size="2px"/>
+
+                        <div class="col-md-8 mx-auto">
+                            <!--<div class="col-md-6 form-group text-center mt-5" t-if="complete == 'complete'">-->
+                            <!--    <a t-attf-href="https://besttransformer.cloudoffix.com/customhttp/run/acente_onayi?konaklama_req=#{konaklama_id}&amp;token=#{konaklama.x_token}&amp;state=complete"-->
+                            <!--       target="_blank"-->
+                            <!--       role="button"-->
+                            <!--       class="no-border btn btn-primary"-->
+                            <!--       style="line-height: 1.42857; margin-right: 10px; font-size: 16px; padding: 10px;"-->
+                            <!--       data-original-title=""-->
+                            <!--       title="">-->
+                            <!--        ✓ Görevi Tamamla-->
+                            <!--    </a>-->
+                            <!--</div>-->
+                            <div class="col-md-4 form-group text-center mt-5" t-if="complete != 'complete'">
+                                <a t-attf-href="https://besttransformer.cloudoffix.com/customhttp/run/konaklama_acente_onayi?konaklama_req=#{konaklama_id}&amp;token=#{konaklama.x_token}&amp;state=positive"
+                                   target="_blank"
+                                   role="button"
+                                   class="no-border btn btn-primary"
+                                   style="line-height: 1.42857; margin-right: 10px; font-size: 16px; padding: 10px;"
+                                   data-original-title=""
+                                   title=""
+                                   id="onayla_btn"
+                                   t-att-data-konaklama-id="konaklama_id">
+                                    ✓ Onayla
+                                </a>
+                            </div> 
+                            <div class="col-md-4 form-group text-center mt-5" t-if="complete != 'complete'">
+                                <a t-attf-href="https://besttransformer.cloudoffix.com/customhttp/run/konaklama_acente_onayi?konaklama_req=#{konaklama_id}&amp;token=#{konaklama.x_token}&amp;state=negative"
+                                   target="_blank"
+                                   role="button"
+                                   class="btn btn-danger"
+                                   style="border-color: rgb(255, 73, 84); line-height: 1.42857; font-size: 16px; padding: 10px;">
+                                    × Reddet
+                                </a>
+                            </div>
+                            <style>
+                              input[type="file"] {
+                                display: none;
+                              }
+                              
+                              .custom-file-upload {
+                                border: 1px solid #ccc;
+                                display: inline-block;
+                                padding: 6px 12px;
+                                cursor: pointer;
+                                background: #8093FC;
+                                color: white;
+                                text-transform:uppercase;
+                              }
+                            </style>
+                            <div class="col-md-4 form-group text-center mt-5">
+                              <label for="x_konaklama_belge" class="custom-file-upload">
+                                  Belge Yükle
+                              </label>
+                              <input class="form-control" name="x_konaklama_belge" id="x_konaklama_belge" type="file"  />
+                            </div> 
+                        </div>
+                    </div>
+                </div>
+        </div>
+
+    </t>
+<script>
+    document.getElementById('onayla_btn').addEventListener('click', function() {
+    
+        const konaklama_id = this.getAttribute('data-konaklama-id');
+        
+        const konaklama_belge = document.getElementById('x_konaklama_belge').files[0];
+
+        var form_data = new FormData();
+        
+        form_data.append("konaklama_belge", konaklama_belge);
+        
+        form_data.append("konaklama_id", konaklama_id);
+        
+        console.log([...form_data])
+        console.log(form_data)
+        
+        const xhr = new XMLHttpRequest();
+        
+        xhr.open("POST", "/customhttp/run/konaklama_belgesi_yukle?konaklama_id=konaklama_id", true);
+        
+        //xhr.onreadystatechange = function () {
+        //  if (xhr.readyState === XMLHttpRequest.DONE) {
+        //    
+        //    if (xhr.status === 200) {
+        //      alert("200")
+        //      console.log('Files uploaded successfully! Redirected to another page. Server response:', xhr.responseText);
+        //      
+        //    } else {
+        //      alert("status code != 200")
+        //      console.error('Failed to upload files. Server response:', xhr.responseText);
+        //      alert("Dosya yüklenirken hata oluştu. Lütfen daha sonra tekrar deneyiniz.")
+        //    }
+        //  }
+        //};
+        
+        xhr.send(form_data);
+        
+    });
+</script>
+</t>
